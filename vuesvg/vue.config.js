@@ -1,9 +1,9 @@
 module.exports = {
     configureWebpack: {
-    //   resolve: {
-    //     alias: {
-    //         snapsvg: 'snapsvg/dist/snap.svg.js',
-    //     },
-    //   }
+      resolve: {
+        alias: {
+            animejs: 'animejs/lib/anime.es.js',
+        },
+      }
     }
   }
