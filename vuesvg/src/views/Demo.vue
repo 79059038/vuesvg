@@ -10,10 +10,12 @@
         <div class="warpDiv">
             <div class="reverseDiv"></div>
         </div>
-        <div class="warpDiv">
+        <div class="warpNormalDiv">
+            <div class="rotateDiv"></div>
+        </div>
+        <div class="warpNormalDiv">
             <div class="shutterDiv"></div>
         </div>
-        
     </div>
 </template>
 <script>
@@ -57,6 +59,15 @@ export default {
                 },
                 loop: true
             })
+            this.anime({
+                targets: '.rotateDiv',
+                translateX: 600,
+                scale: 2,
+                rotate: 360,
+                easing: 'easeInOutSine',
+                direction: 'alternate',
+                loop: true
+            })
         }
     }
 
@@ -88,11 +99,26 @@ export default {
             left: 50%;
             position: absolute;
         }
+        
+    }
+    .warpNormalDiv{
+        position: relative;
+        width: 556px;
+        height: 112px;
+        margin: 0 auto;
+        padding: 5px;
+        .rotateDiv{
+            width: 20px;
+            height: 20px;
+            background: #d44242;
+            position: absolute;
+        }
         .shutterDiv{
             width: 100px;
             height: 100px;
-            background: #d44242;
-            margin: 0 auto;
+            position: absolute;
+            background: #d686c2;
+            left: 228px;
         }
     }
 }
