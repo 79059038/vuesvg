@@ -16,16 +16,29 @@
         <div class="warpNormalDiv">
             <div class="shutterDiv"></div>
         </div>
+        <div class="warpNormalDiv">
+            <div class="timeline"></div>
+        </div>
+        <div class="warpNormalDiv">
+            <div class="timeline"></div>
+        </div>
     </div>
 </template>
 <script>
 import anime from 'animejs'
-
+// import data from '../data/data.json'
 export default {
     data(){
         return {
-            anime
+            anime,
         }
+    },
+    created(){
+        this.$axios.get('../data/data.json')
+            .then(res => {
+                console.log(res)
+                this.anime(res.data[0])
+            })
     },
     mounted(){
         
@@ -33,40 +46,69 @@ export default {
     methods: {
         animation(){
             const path = this.anime.path('path');
-            this.anime({
+            const tl = this.anime.timeline({
+                easing: 'easeOutExpo'
+            })
+            tl.add({
                 targets: '.moveDiv',
                 translateX: path('x'),
                 translateY: path('y'),
                 rotate: path('angle'),
-                duration: 3000,
-                loop: true,
-                easing: 'linear'
-            })
-            this.anime({
+                duration: '3000',
+                loop: 'true',
+                easing: 'linear'               
+            }).add({
                 targets: 'path',
-                opacity: 0,
-                duration: 6000,
-                loop: true,
+                opacity: '0',
+                duration: '6000',
+                loop: 'true',
                 direction: 'alternate',
                 easing: 'easeInOutExpo'
             })
+            // this.anime({
+            //     targets: '.moveDiv',
+            //     translateX: path('x'),
+            //     translateY: path('y'),
+            //     rotate: path('angle'),
+            //     duration: 3000,
+            //     loop: true,
+            //     easing: 'linear'
+            // })
+            // this.anime({
+            //     targets: 'path',
+            //     opacity: 0,
+            //     duration: 6000,
+            //     loop: true,
+            //     direction: 'alternate',
+            //     easing: 'easeInOutExpo'
+            // })
+            // this.anime({
+            //     targets: '.rotateDiv',
+            //     translateX: 600,
+            //     scale: 2,
+            //     rotate: 360,
+            //     easing: 'easeInOutSine',
+            //     direction: 'alternate',
+            //     loop: true
+            // })
             this.anime({
-                targets: '.reverseDiv',
-                rotate: {
-                    value: 180,
-                    duration: 1000,
-                    easing: 'easeInOutSine'
-                },
-                loop: true
+                targets: '.shutterDiv',
+                opacity: 0,
+                translateX: [-10, 10],
+                easing: 'easeInOutSine',
+                duration: 100,
+                loop: 4
             })
             this.anime({
-                targets: '.rotateDiv',
-                translateX: 600,
-                scale: 2,
-                rotate: 360,
+                targets: '.timeline',
+                translateX: 500,
                 easing: 'easeInOutSine',
+                duration: 1000,
                 direction: 'alternate',
-                loop: true
+                loop: true,
+                delay: function(el, i){
+                    return i * 100
+                }
             })
         }
     }
@@ -74,24 +116,27 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-#main{
+#main {
     width: 100%;
     height: 600px;
-    .warpDiv{
+
+    .warpDiv {
         position: relative;
         width: 256px;
         height: 112px;
         margin: 0 auto;
         padding: 5px;
-        .moveDiv{
+
+        .moveDiv {
             width: 10px;
             height: 10px;
-            background: #aaaaaa;
+            background: #aaa;
             position: absolute;
             top: 2px;
             left: 2px;
         }
-        .reverseDiv{
+
+        .reverseDiv {
             width: 25px;
             height: 25px;
             background: #7ccf4b;
@@ -99,26 +144,37 @@ export default {
             left: 50%;
             position: absolute;
         }
-        
     }
-    .warpNormalDiv{
+
+    .warpNormalDiv {
         position: relative;
         width: 556px;
         height: 112px;
         margin: 0 auto;
         padding: 5px;
-        .rotateDiv{
+
+        div {
+            position: absolute;
+        }
+
+        .rotateDiv {
             width: 20px;
             height: 20px;
             background: #d44242;
-            position: absolute;
         }
-        .shutterDiv{
+
+        .shutterDiv {
             width: 100px;
             height: 100px;
-            position: absolute;
             background: #d686c2;
             left: 228px;
+        }
+
+        .timeline {
+            width: 0;
+            height: 0;
+            border: 25px solid transparent;
+            border-bottom-color: #e4425d;
         }
     }
 }

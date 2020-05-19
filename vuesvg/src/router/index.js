@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Demo from '../views/Demo.vue'
+import Three from '../views/ThreeDemo.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/three',
+    name: 'Three',
+    component: Three
   },
   {
     path: '/about',

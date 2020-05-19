@@ -3,6 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import {Button, Select} from 'element-ui'
+import axios from 'axios'
+
+const axiosInstall = axios.create({
+  timeout: 1000
+})
+Vue.prototype.$axios = axiosInstall
 
 Vue.config.productionTip = false
 

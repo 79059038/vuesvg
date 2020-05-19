@@ -1,0 +1,11 @@
+[
+    {
+        "targets": ".rotateDiv",
+        "translateX": "600",
+        "scale": "2",
+        "rotate": "360",
+        "easing": "easeInOutSine",
+        "direction": "alternate",
+        "loop": true
+    }
+]
